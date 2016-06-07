@@ -2,8 +2,8 @@
 
 function create(molecules, options) {
     var options=options || {};
-    var molfileAttributeName=options.molfileAttributeName || 'molfile';
-    var crlf = options.crlf || '\n';
+    var molfilePropertyName=options.molfilePropertyName || 'molfile';
+    var eol = options.eol || '\n';
 
     var emptyMolfile='empty.mol\n  Spectrum generator\n\n  0  0  0  0  0  0  0  0  0  0999 V2000\nM  END\n';
 
@@ -12,14 +12,14 @@ function create(molecules, options) {
 
     function normaliseMolfile(molfile) {
         if (!molfile) molfile=emptyMolfile;
-        var molCRLF = '\n';
+        var molfileEOL = '\n';
         if (molfile.indexOf('\r\n') > -1) {
-            molCRLF = '\r\n';
+            molfileEOL = '\r\n';
         } else if (header.indexOf('\r') > -1) {
-            molCRLF = '\r';
+            molfileEOL = '\r';
         }
-        var lines=molfile.replace(/[\r\n]+$/,'').split(molCRLF);
-        return lines.join(crlf);
+        var lines=molfile.replace(/[\r\n]+$/,'').split(molfileEOL);
+        return lines.join(eol);
     }
 
 
@@ -27,16 +27,16 @@ function create(molecules, options) {
         var result=[];
         for (var i=0; i<molecules.length; i++) {
             var molecule=molecules[i];
-            result.push(normaliseMolfile(molecule[molfileAttributeName]));
+            result.push(normaliseMolfile(molecule[molfilePropertyName]));
             for (var key in molecule) {
-                if (key!==molfileAttributeName) {
+                if (key!==molfilePropertyName) {
                     result.push('>  <'+key+'>');
-                    result.push(molecule[key]+crlf);
+                    result.push(molecule[key]+eol);
                 }
             }
             result.push('$$$$');
         }
-        return result.join(crlf);
+        return result.join(eol);
     }
 
     return {

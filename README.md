@@ -31,8 +31,8 @@ console.log(result.sdf);
 ## require('sdf-creator') (array, options)
 
 options:
-* crlf : end of line separator, by default '\n'
-* molfileAttributeName : name of the attribute containing the molfile, by default: 'molfile'
+* eol : end of line separator, by default '\n'
+* molfilePropertyName : name of the property containing the molfile, by default: 'molfile'
 
 ## Test
 
