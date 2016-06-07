@@ -1,0 +1,37 @@
+{
+  "name": "sdf-creator",
+  "version": "1.0.0",
+  "description": "SDF creator",
+  "main": "./src/index.js",
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --require should --reporter mocha-better-spec-reporter --recursive",
+    "build": "cheminfo build --root SDFCreator"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cheminfo-js/sdf-creator.git"
+  },
+  "keywords": [
+    "sdf",
+    "create",
+    "molfile",
+    "v2000",
+    "mdl"
+  ],
+  "author": "Luc Patiny",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cheminfo-js/sdf-creator/issues"
+  },
+  "homepage": "https://github.com/cheminfo-js/sdf-creator",
+  "devDependencies": {
+    "cheminfo-tools": "^1.0.2",
+    "mocha": "^2.2.5",
+    "mocha-better-spec-reporter": "^2.1.1",
+    "should": "^7.0.2"
+  }
+}
