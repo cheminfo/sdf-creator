@@ -71,7 +71,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var molfileEOL = '\n';
 	        if (molfile.indexOf('\r\n') > -1) {
 	            molfileEOL = '\r\n';
-	        } else if (header.indexOf('\r') > -1) {
+	        } else if (molfile.indexOf('\r') > -1) {
 	            molfileEOL = '\r';
 	        }
 	        var lines=molfile.replace(/[\r\n]+$/,'').split(molfileEOL);
