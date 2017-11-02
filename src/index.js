@@ -1,14 +1,18 @@
 'use strict';
 
-function create(molecules, options) {
-    var options=options || {};
-    var molfilePropertyName=options.molfilePropertyName || 'molfile';
-    var eol = options.eol || '\n';
+
+function create(molecules, options={}) {
+    var {
+        molfilePropertyName= 'molfile',
+        eol = '\n',
+        filter = /.*/
+    } = options;
+
 
     var emptyMolfile='empty.mol\n  Spectrum generator\n\n  0  0  0  0  0  0  0  0  0  0999 V2000\nM  END\n';
 
     var start = Date.now();
-    var sdf=createSDF(molecules);
+    var sdf=createSDF(molecules, filter);
 
     function normaliseMolfile(molfile) {
         if (!molfile) molfile=emptyMolfile;
@@ -23,13 +27,13 @@ function create(molecules, options) {
     }
 
 
-    function createSDF() {
+    function createSDF(molecules, filter) {
         var result=[];
         for (var i=0; i<molecules.length; i++) {
             var molecule=molecules[i];
             result.push(normaliseMolfile(molecule[molfilePropertyName]));
             for (var key in molecule) {
-                if (key!==molfilePropertyName) {
+                if (key!==molfilePropertyName && (! filter || key.match(filter))) {
                     result.push('>  <'+key+'>');
                     result.push(molecule[key]+eol);
                 }
