@@ -1,6 +1,6 @@
 {
   "name": "sdf-creator",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "SDF creator",
   "main": "./src/index.js",
   "directories": {
