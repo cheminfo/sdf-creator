@@ -1,11 +1,21 @@
 'use strict';
 
+/**
+ * 
+ * @param {*} molecules 
+ * @param {Object} [{}] options options to create the SDF
+ * @param {boolean} [false] options.strict throw errors in no molfile
+ * @param {string} ["molfile"] options.molfilePropertyName contains the name of the property containing the molfile 
+ * @param {regex} [/.* /] options.filter regular expression containing a filter for the properties to add
+ * @param {string} ['\n'] eol string to use as end-of-line delimiter
+ */
 
 function create(molecules, options={}) {
     var {
         molfilePropertyName= 'molfile',
         eol = '\n',
-        filter = /.*/
+        filter = /.*/,
+        strict= false
     } = options;
 
 
@@ -15,7 +25,10 @@ function create(molecules, options={}) {
     var sdf=createSDF(molecules, filter);
 
     function normaliseMolfile(molfile) {
-        if (!molfile) molfile=emptyMolfile;
+        if (!molfile) {
+            if (strict) throw new Error('Array containing emtpy molfiles');
+            molfile=emptyMolfile;
+        }
         var molfileEOL = '\n';
         if (molfile.indexOf('\r\n') > -1) {
             molfileEOL = '\r\n';

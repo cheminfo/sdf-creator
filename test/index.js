@@ -20,4 +20,9 @@ describe('SDF Creator', function () {
         result.sdf.indexOf('mf').should.be.above(100);
         result.sdf.split('$$$$').length.should.be.equal(11);
     });
+
+    it('check strict mode', function () {
+        (() => create(molecules, {filter:/^(mf|mw|den)/, strict: true})).should.throw('Array containing emtpy molfiles');
+        
+    });
 });
