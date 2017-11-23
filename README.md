@@ -34,7 +34,7 @@ options:
 * eol: end of line separator, by default '\n'
 * molfilePropertyName: name of the property containing the molfile, by default: 'molfile'
 * filter: regexp that define which property will be exported. By default '/.*/'
-
+* strict: throw an error if a molfile is empty
 ## Test
 
 ```bash
