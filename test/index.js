@@ -25,4 +25,10 @@ describe('SDF Creator', function () {
         (() => create(molecules, {filter:/^(mf|mw|den)/, strict: true})).should.throw('Array containing emtpy molfiles');
         
     });
+
+    it('check empty fields', function () {
+        var result = create(molecules);
+        result.sdf.split('density').length.should.be.equal(11);
+        result.sdf.split('unique').length.should.be.equal(2);
+    });
 });

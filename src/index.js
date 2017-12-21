@@ -46,7 +46,7 @@ function create(molecules, options={}) {
             var molecule=molecules[i];
             result.push(normaliseMolfile(molecule[molfilePropertyName]));
             for (var key in molecule) {
-                if (key!==molfilePropertyName && (! filter || key.match(filter))) {
+                if (key!==molfilePropertyName && (! filter || key.match(filter)) && molecule[key]) {
                     result.push('>  <'+key+'>');
                     result.push(molecule[key]+eol);
                 }
