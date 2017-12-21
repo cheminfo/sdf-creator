@@ -1,6 +1,6 @@
 /**
  * sdf-creator - SDF creator
- * @version v2.0.2
+ * @version v2.0.3
  * @link https://github.com/cheminfo-js/sdf-creator
  * @license MIT
  */
