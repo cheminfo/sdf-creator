@@ -1,6 +1,6 @@
 /**
  * sdf-creator - SDF creator
- * @version v2.0.1
+ * @version v2.0.2
  * @link https://github.com/cheminfo-js/sdf-creator
  * @license MIT
  */
@@ -13,7 +13,7 @@
 		exports["SDFCreator"] = factory();
 	else
 		root["SDFCreator"] = factory();
-})(this, function() {
+})(typeof self !== 'undefined' ? self : this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -86,13 +86,25 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
+/**
+ * 
+ * @param {*} molecules 
+ * @param {Object} [{}] options options to create the SDF
+ * @param {boolean} [false] options.strict throw errors in no molfile
+ * @param {string} ["molfile"] options.molfilePropertyName contains the name of the property containing the molfile 
+ * @param {regex} [/.* /] options.filter regular expression containing a filter for the properties to add
+ * @param {string} ['\n'] eol string to use as end-of-line delimiter
+ */
+
 function create(molecules, options = {}) {
     var _options$molfilePrope = options.molfilePropertyName,
         molfilePropertyName = _options$molfilePrope === undefined ? 'molfile' : _options$molfilePrope,
         _options$eol = options.eol,
         eol = _options$eol === undefined ? '\n' : _options$eol,
         _options$filter = options.filter,
-        filter = _options$filter === undefined ? /.*/ : _options$filter;
+        filter = _options$filter === undefined ? /.*/ : _options$filter,
+        _options$strict = options.strict,
+        strict = _options$strict === undefined ? false : _options$strict;
 
 
     var emptyMolfile = 'empty.mol\n  Spectrum generator\n\n  0  0  0  0  0  0  0  0  0  0999 V2000\nM  END\n';
@@ -101,7 +113,10 @@ function create(molecules, options = {}) {
     var sdf = createSDF(molecules, filter);
 
     function normaliseMolfile(molfile) {
-        if (!molfile) molfile = emptyMolfile;
+        if (!molfile) {
+            if (strict) throw new Error('Array containing emtpy molfiles');
+            molfile = emptyMolfile;
+        }
         var molfileEOL = '\n';
         if (molfile.indexOf('\r\n') > -1) {
             molfileEOL = '\r\n';
@@ -118,7 +133,7 @@ function create(molecules, options = {}) {
             var molecule = molecules[i];
             result.push(normaliseMolfile(molecule[molfilePropertyName]));
             for (var key in molecule) {
-                if (key !== molfilePropertyName && (!filter || key.match(filter))) {
+                if (key !== molfilePropertyName && (!filter || key.match(filter)) && molecule[key]) {
                     result.push('>  <' + key + '>');
                     result.push(molecule[key] + eol);
                 }
