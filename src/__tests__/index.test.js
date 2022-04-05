@@ -3,7 +3,7 @@ import { join } from 'path';
 
 import { create } from '..';
 
-let molecules = JSON.parse(readFileSync(join(__dirname, 'test.json'), 'utf-8'));
+let molecules = JSON.parse(readFileSync(join(__dirname, 'data.json'), 'utf-8'));
 
 describe('SDF Creator', () => {
   it('Check result without field filter', () => {
