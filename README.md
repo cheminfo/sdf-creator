@@ -1,61 +1,36 @@
 # sdf-creator
 
-  [![NPM version][npm-image]][npm-url]
-  [![build status][travis-image]][travis-url]
-  [![David deps][david-image]][david-url]
-  [![npm download][download-image]][download-url]
+[![NPM version][npm-image]][npm-url]
+[![build status][ci-image]][ci-url]
+[![Test coverage][codecov-image]][codecov-url]
+[![npm download][download-image]][download-url]
 
-Allow to create a SDF file from an array of object containing the molfile property
+Create SDF files.
 
-## Use of the package
+## Installation
 
-```bash
-npm install sdf-creator
-```
+`$ npm i sdf-creator`
 
-In node script:
+## Usage
+
 ```js
+import library from 'sdf-creator';
 
-// allows to create a SDF file a file test.json in the same directory
-
-var create = require('sdf-creator');
-
-var molecules = JSON.parse(fs.readFileSync(__dirname + '/test.json', 'utf-8'));
-
-var result = create(molecules);
-
-console.log(result.sdf);
-
+const result = library(args);
+// result is ...
 ```
 
-## require('sdf-creator') (array, options)
-
-options:
-* eol: end of line separator, by default '\n'
-* molfilePropertyName: name of the property containing the molfile, by default: 'molfile'
-* filter: regexp that define which property will be exported. By default '/.*/'
-* strict: throw an error if a molfile is empty
-## Test
-
-```bash
-npm test
-```
-
-## Build
-
-```bash
-npm run build
-```
+## [API Documentation](https://cheminfo.github.io/sdf-creator/)
 
 ## License
 
-  [MIT](./LICENSE)
+[MIT](./LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/sdf-creator.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/sdf-creator.svg
 [npm-url]: https://www.npmjs.com/package/sdf-creator
-[travis-image]: https://img.shields.io/travis/cheminfo-js/sdf-creator/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/cheminfo-js/sdf-creator
-[david-image]: https://img.shields.io/david/cheminfo-js/sdf-creator.svg?style=flat-square
-[david-url]: https://david-dm.org/cheminfo-js/sdf-creator
-[download-image]: https://img.shields.io/npm/dm/sdf-creator.svg?style=flat-square
+[ci-image]: https://github.com/cheminfo/sdf-creator/workflows/Node.js%20CI/badge.svg?branch=main
+[ci-url]: https://github.com/cheminfo/sdf-creator/actions?query=workflow%3A%22Node.js+CI%22
+[codecov-image]: https://img.shields.io/codecov/c/github/cheminfo/sdf-creator.svg
+[codecov-url]: https://codecov.io/gh/cheminfo/sdf-creator
+[download-image]: https://img.shields.io/npm/dm/sdf-creator.svg
 [download-url]: https://www.npmjs.com/package/sdf-creator
