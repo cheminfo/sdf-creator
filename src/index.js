@@ -1,9 +1,9 @@
 /**
  * Converts an array of objects containing molfile to a SDF
  * @param {*} molecules
- * @param {Object} [options={}] options to create the SDF
- * @param {boolean} [options.strict=false] throw errors in no molfile
- * @param {string} [options.molfilePropertyName="molfile"] contains the name of the property containing the molfile
+ * @param {object} [options={}] - options to create the SDF
+ * @param {boolean} [options.strict=false] - throw errors in no molfile
+ * @param {string} [options.molfilePropertyName="molfile"] - contains the name of the property containing the molfile
  * @param {RegExp} [options.filter=/.*\/] - regular expression containing a filter for the properties to add
  * @param {string} [options.eol='\n'] - string to use as end-of-line delimiter
  * @returns {object}
@@ -29,9 +29,9 @@ export function create(molecules, options = {}) {
       molfile = emptyMolfile;
     }
     let molfileEOL = '\n';
-    if (molfile.indexOf('\r\n') > -1) {
+    if (molfile.includes('\r\n')) {
       molfileEOL = '\r\n';
-    } else if (molfile.indexOf('\r') > -1) {
+    } else if (molfile.includes('\r')) {
       molfileEOL = '\r';
     }
     let lines = molfile.replace(/[\r\n]+$/, '').split(molfileEOL);
@@ -49,8 +49,7 @@ export function create(molecules, options = {}) {
           (!filter || key.match(filter)) &&
           molecule[key]
         ) {
-          result.push(`>  <${key}>`);
-          result.push(molecule[key] + eol);
+          result.push(`>  <${key}>`, molecule[key] + eol);
         }
       }
       result.push('$$$$');
@@ -60,6 +59,6 @@ export function create(molecules, options = {}) {
 
   return {
     time: Date.now() - start,
-    sdf: sdf,
+    sdf,
   };
 }

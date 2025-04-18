@@ -1,9 +1,13 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+import { describe, it, expect } from 'vitest';
 
 import { create } from '..';
 
-let molecules = JSON.parse(readFileSync(join(__dirname, 'data.json'), 'utf-8'));
+let molecules = JSON.parse(
+  readFileSync(join(import.meta.dirname, 'data.json'), 'utf8'),
+);
 
 describe('SDF Creator', () => {
   it('Check result without field filter', () => {
