@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/cheminfo/sdf-creator/compare/v3.0.1...v4.0.0) (2026-03-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* This package is now ESM-only.
+
+### Features
+
+* migrate to ESM TypeScript ([585c265](https://github.com/cheminfo/sdf-creator/commit/585c265d4176b1cd36abf277527955ed2c91de49))
+
 ## [3.0.1](https://github.com/cheminfo/sdf-creator/compare/v3.0.0...v3.0.1) (2025-04-18)
 
 
