@@ -69,12 +69,13 @@ export function create(
   for (const molecule of molecules) {
     result.push(normaliseMolfile(molecule[molfilePropertyName]));
     for (const key in molecule) {
+      const value = molecule[key];
       if (
         key !== molfilePropertyName &&
         (!filter || key.match(filter)) &&
-        molecule[key]
+        value
       ) {
-        result.push(`>  <${key}>`, molecule[key] + eol);
+        result.push(`>  <${key}>`, value + eol);
       }
     }
     result.push('$$$$');
